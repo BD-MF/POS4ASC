@@ -1,2 +1,3 @@
-# POS4ASC
-The code implementation of the acl2021 paper《Exploiting Position Bias for Robust Aspect Sentiment Classification》
+## POS4ASC
+
+Code and preprocessed dataset for ACL 2021 paper titled "Exploiting Position Bias for Robust Aspect Sentiment Classification"
