@@ -49,7 +49,7 @@
         --weight_decay 0.0
     ```
 * Evaluate the model with a command similar to those in [run.sh](./run.sh) or [run_bert.sh](./run_bert.sh), optional arguments could be found in [run.py](./run.py). 
-* An example of evaluation with lstm on the adversarial test set 
+* An example of evaluation with LSTM w/ position-biased weight on the adversarial test set 
     ```bash
     python run.py 
         --model_name lstm 
@@ -58,7 +58,7 @@
         --mode evluate
         --weight
     ```
-* An example of evaluation with roberta on the adversarial test set 
+* An example of evaluation with Roberta w/ position-biased weight on the adversarial test set 
     ```bash
     python run.py 
         --model_name roberta 
