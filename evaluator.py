@@ -50,12 +50,12 @@ class Evaluator:
         return acc, f1
 
     def run(self, args, embedding, test_data):
-        print('+' * 30 + 'evaluation on {}'.format(args.test_data_name) + '+' * 30)
+        print('+' * 30 + ' evaluation on {} '.format(args.test_data_name) + '+' * 30)
         writer = open(os.path.join(args.exp_dir, '{}_result.txt'.format(args.test_data_name)), 'w', encoding='utf-8')
         result_dict = {'acc': [], 'f1': []}
         for i in range(args.num_repeats):
-            print('#' * 30 + 'repeat {}'.format(i + 1) + '#' * 30)
-            writer.write('#' * 30 + 'repeat {}'.format(i + 1) + '#' * 30 + '\n')
+            print('#' * 30 + ' repeat {} '.format(i + 1) + '#' * 30)
+            writer.write('#' * 30 + ' repeat {} '.format(i + 1) + '#' * 30 + '\n')
 
             test_data_loader = ASCDataLoader(
                 test_data,
@@ -75,8 +75,8 @@ class Evaluator:
             writer.write('test acc: {:.4f}, test f1: {:.4f}\n'.format(test_acc, test_f1))
             result_dict['acc'].append(test_acc)
             result_dict['f1'].append(test_f1)
-        print('#' * 30 + 'average' + '#' * 30)
-        writer.write('#' * 30 + 'average' + '#' * 30 + '\n')
+        print('#' * 30 + ' average ' + '#' * 30)
+        writer.write('#' * 30 + ' average ' + '#' * 30 + '\n')
         print('acc: {:.4f}, f1: {:.4f}'.format(
             np.mean(result_dict['acc']), np.mean(result_dict['f1'])))
         writer.write('acc: {:.4f}, f1: {:.4f}\n'.format(

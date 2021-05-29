@@ -91,9 +91,9 @@ class Trainer:
         return acc, f1
 
     def run(self, args, embedding, train_data, dev_data):
-        print('+' * 30 + 'training on {}'.format(args.train_data_name) + '+' * 30)
+        print('+' * 30 + ' training on {} '.format(args.train_data_name) + '+' * 30)
         for i in range(args.num_repeats):
-            print('#' * 30 + 'repeat {}'.format(i + 1) + '#' * 30)
+            print('#' * 30 + ' repeat {} '.format(i + 1) + '#' * 30)
 
             train_data_loader = ASCDataLoader(
                 train_data,
