@@ -1,7 +1,7 @@
 # POS4ASC
 
 **POS4ASC** - Exploiting **Pos**ition Bias for Robust **A**spect **S**entiment **C**lassification
-* Our code and data for [ACL 2021](https://2021.aclweb.org/) paper titled "[Exploiting Position Bias for Robust Aspect Sentiment Classification](https://arxiv.org/abs/xxxx)" 
+* Our code and data for [ACL 2021](https://2021.aclweb.org/) paper titled "[Exploiting Position Bias for Robust Aspect Sentiment Classification](https://arxiv.org/abs/2105.14210)" 
 * [Fang Ma](https://github.com/BD-MF), [Chen Zhang](https://genezc.github.io), and [Dawei Song](http://cs.bit.edu.cn/szdw/jsml/js/sdw/index.htm).
 
 ## Intuition
