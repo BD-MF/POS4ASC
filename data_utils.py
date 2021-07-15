@@ -113,12 +113,8 @@ def build_tokenizer_for_bert(data_dir, cache_dir='caches', use_fast=True):
 
     return tokenizer
 
-def truncate_and_pad(indices, max_length=128, pad_idx=0):
-    if len(indices) > max_length:
-        sep_idx = indices[-1]
-        sep_pos = indices.index(sep_idx) # first sep pos
-        truncate_len = len(indices) - max_length
-        indices = indices[:sep_pos - truncate_len] + indices[sep_pos:]
+def pad(indices, max_length=128, pad_idx=0):
+    assert len(indices) <= max_length, 'the length exceeds max_length'
     _len = len(indices)
     indices = indices + [pad_idx] * (max_length - _len)
     mask = [1] * _len + [0] * (max_length - _len)
@@ -143,10 +139,10 @@ def build_data(data_dir, tokenizer, max_length=128):
                 right_indices = tokenizer(text_right)
                 aspect_indices = tokenizer(aspect)
 
-                text_indices, text_mask = truncate_and_pad(left_indices + aspect_indices + right_indices, max_length=max_length)
-                #aspect_position_mask, _ = truncate_and_pad([0] * len(left_indices) + [1] * len(aspect_indices) + [0] * len(right_indices), max_length=max_length)
+                text_indices, text_mask = pad(left_indices + aspect_indices + right_indices, max_length=max_length)
+                #aspect_position_mask, _ = pad([0] * len(left_indices) + [1] * len(aspect_indices) + [0] * len(right_indices), max_length=max_length)
                 aspect_boundary_indices = [len(left_indices), len(left_indices) + len(aspect_indices) - 1]
-                aspect_indices, aspect_mask = truncate_and_pad(aspect_indices, max_length=max_length)
+                aspect_indices, aspect_mask = pad(aspect_indices, max_length=max_length)
             
                 polarity = polarity_map[set_dict[k]['polarity']]
 
@@ -183,10 +179,10 @@ def build_data_for_bert(data_dir, tokenizer, max_length=128):
                 right_indices = tokenizer(text_right, add_special_tokens=False)['input_ids']
                 aspect_indices = tokenizer(aspect, add_special_tokens=False)['input_ids']
 
-                text_indices, text_mask = truncate_and_pad([tokenizer.cls_token_id] + left_indices + aspect_indices + right_indices + [tokenizer.sep_token_id], max_length=max_length, pad_idx=tokenizer.pad_token_id)
-                #aspect_position_mask, _ = truncate_and_pad([0] + [0] * len(left_indices) + [1] * len(aspect_indices) + [0] * len(right_indices) + [0], max_length=max_length, pad_idx=0)
+                text_indices, text_mask = pad([tokenizer.cls_token_id] + left_indices + aspect_indices + right_indices + [tokenizer.sep_token_id], max_length=max_length, pad_idx=tokenizer.pad_token_id)
+                #aspect_position_mask, _ = pad([0] + [0] * len(left_indices) + [1] * len(aspect_indices) + [0] * len(right_indices) + [0], max_length=max_length, pad_idx=0)
                 aspect_boundary_indices = [len(left_indices) + 1, len(left_indices) + len(aspect_indices)]
-                aspect_indices, aspect_mask = truncate_and_pad([tokenizer.cls_token_id] + aspect_indices  + [tokenizer.sep_token_id], max_length=max_length, pad_idx=tokenizer.pad_token_id)
+                aspect_indices, aspect_mask = pad([tokenizer.cls_token_id] + aspect_indices  + [tokenizer.sep_token_id], max_length=max_length, pad_idx=tokenizer.pad_token_id)
                 
                 polarity = polarity_map[set_dict[k]['polarity']]
 
