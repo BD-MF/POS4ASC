@@ -115,7 +115,10 @@ def build_tokenizer_for_bert(data_dir, cache_dir='caches', use_fast=True):
 
 def truncate_and_pad(indices, max_length=128, pad_idx=0):
     if len(indices) > max_length:
-        indices = indices[:max_length-1] + [indices[-1]]
+        sep_idx = indices[-1]
+        sep_pos = indices.index(sep_idx) # first sep pos
+        truncate_len = len(indices) - max_length
+        indices = indices[:sep_pos - truncate_len] + indices[sep_pos:]
     _len = len(indices)
     indices = indices + [pad_idx] * (max_length - _len)
     mask = [1] * _len + [0] * (max_length - _len)
