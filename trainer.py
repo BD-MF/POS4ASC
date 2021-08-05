@@ -2,6 +2,7 @@
 
 import os
 import time
+import copy
 import random
 
 import numpy as np
@@ -105,8 +106,8 @@ class Trainer:
                 batch_size=args.batch_size, 
                 shuffle=False
             )
-
-            model = args.model_class(args, embedding).to(args.device)
+            
+            model = args.model_class(args, copy.deepcopy(embedding)).to(args.device)
             
             temp_best_path = os.path.join(args.exp_dir, 'best_ckpt_{}.pt'.format(i))
 
